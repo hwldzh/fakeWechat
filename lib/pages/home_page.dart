@@ -85,7 +85,6 @@ class HomeState extends State<HomePage> {
             itemCount: listData.length,
             itemBuilder: (context, index) => buildItem(index),
             controller: _scrollController,
-            shrinkWrap: true,
           ),
           onRefresh: _onRefresh
       );
