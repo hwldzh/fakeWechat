@@ -40,7 +40,7 @@ class HomeState extends State<HomePage> {
   }
 
   void getChatData() {
-    HttpUtil.queryMulti((chatBeanList, totalCount) {
+    HttpUtil.queryMultiChatBean((chatBeanList, totalCount) {
       if(_totalCount <= 0) {
         _totalCount = totalCount;
       }
@@ -83,15 +83,15 @@ class HomeState extends State<HomePage> {
       return RefreshIndicator(
           child: ListView.builder(
             itemCount: listData.length,
-            itemBuilder: (context, index) => buildItem(index),
+            itemBuilder: (context, index) => buildItem(context, index),
             controller: _scrollController,
           ),
-          onRefresh: _onRefresh
+          onRefresh: _onRefresh,
       );
     }
   }
 
-  Widget buildItem(int index) {
+  Widget buildItem(BuildContext context, int index) {
     var itemData = listData[index];
     if(itemData is String && itemData == Constants.LOADING_MORE) {
       return LoadingMore();
