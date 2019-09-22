@@ -103,12 +103,6 @@ class PayListState extends State<PayList> {
             )
           ],
         )
-//        SizedBox(
-//          height: 200.0,
-//          child: Row(
-//            children: <Widget>[],
-//          )
-//        )
       ],
     );
 
