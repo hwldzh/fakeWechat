@@ -21,7 +21,10 @@ class PayListState extends State<PayList> {
     } else {
       return ListView.builder(
         itemBuilder: (context, index) {
-          return _getPayDetailCard(index);
+          return Padding(
+            padding: EdgeInsets.only(left: 20, right: 20),
+            child: _getPayDetailCard(index),
+          );
         },
         itemCount: _messageList.length,
       );
@@ -44,43 +47,57 @@ class PayListState extends State<PayList> {
           children: <Widget>[
             Expanded(
               child: Card(
-                child: Column(
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Text(
-                          weChatPay.businessName,
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        )
-                      ],
-                    ),
-                    Center(
-                      child: Text(
-                        "付款金额"
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            weChatPay.businessName,
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          )
+                        ],
                       ),
-                    ),
-                    Center(
-                      child: Text(
-                        weChatPay.payMoney,
-                        style: TextStyle(
-                          fontSize: 30
+                      Padding(
+                        padding: EdgeInsets.only(top: 20),
+                        child: Center(
+                          child: Text(
+                              "付款金额"
+                          ),
                         ),
                       ),
-                    ),
-                    Divider(
-                      height: 0.5,
-                      color: Colors.grey,
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Text(
-                          "查看账单详情"
-                        )
-                      ],
-                    )
-                  ],
+                      Center(
+                        child: Text(
+                          weChatPay.payMoney,
+                          style: TextStyle(
+                              fontSize: 30
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 20, bottom: 10),
+                        child: Divider(
+                          height: 0.5,
+                          color: Colors.grey,
+                        ),
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: Text(
+                                "查看账单详情"
+                            ),
+                          ),
+                          Icon(
+                              Icons.keyboard_arrow_right
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               )
             )
