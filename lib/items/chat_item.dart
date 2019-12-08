@@ -1,3 +1,4 @@
+import 'package:fake_wechat/pages/chat_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fake_wechat/bean/chat_bean.dart';
 
@@ -12,7 +13,6 @@ class ChatItem extends StatefulWidget {
   ChatItemState createState() {
     return ChatItemState();
   }
-
 }
 
 class ChatItemState extends State<ChatItem> {
@@ -73,7 +73,10 @@ class ChatItemState extends State<ChatItem> {
       children: <Widget>[
         Padding(
           padding: EdgeInsets.fromLTRB(12, 8, 12, 8),
-          child: _row,
+          child: GestureDetector(
+            child: _row,
+            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ChatPage(widget._chatBean))),
+          )
         ),
         Divider(
           height: 0.5,
