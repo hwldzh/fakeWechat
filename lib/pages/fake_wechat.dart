@@ -1,11 +1,12 @@
+import 'package:fake_wechat/pages/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fake_wechat/pages/home_page.dart';
 import 'package:fake_wechat/pages/contact_page.dart';
 import 'package:fake_wechat/pages/near_me_page.dart';
 import 'package:fake_wechat/pages/mine_page.dart';
 
-class FakeWeChat extends StatefulWidget {
 
+class FakeWeChat extends StatefulWidget {
   @override
   FakeWeChatState createState() {
     return FakeWeChatState();
@@ -13,6 +14,28 @@ class FakeWeChat extends StatefulWidget {
 }
 
 class FakeWeChatState extends State<FakeWeChat> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: '微信仿真',
+      theme: ThemeData( // App的主题
+        primaryColor: Colors.blue,
+      ),
+      home: AppPage(),
+    );
+  }
+
+}
+/// FakeWeChat是一个有状态的Widget，可以看到FakeWeChatState的build方法返回MaterialApp的Widget对象
+class AppPage extends StatefulWidget {
+
+  @override
+  AppPageState createState() {
+    return AppPageState();
+  }
+}
+
+class AppPageState extends State<AppPage> {
   var _appBarTitles =  const ['微信', '通讯录', '发现', '我'];
   var _currentItemIndex = 0;
   List<BottomNavigationBarItem> _bottomNavigationBarItems;
@@ -32,18 +55,19 @@ class FakeWeChatState extends State<FakeWeChat> {
         icon: Icon(
           Icons.search,
         ),
-        onPressed: () {
+        onPressed: () { //如果去掉这个属性，IconButton默认是不可点击的，则这个时候它会显示为灰色
           //TODO 点击跳转到搜索页面
+          Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context) => new SearchPage()));
         },
       ),
       IconButton(
         icon: Icon(
           Icons.add_circle_outline,
         ),
-        onPressed: () {
+        onPressed: () { //如果去掉这个属性，IconButton默认是不可点击的，则这个时候它会显示为灰色
           // TODO 点击弹出更多菜单
         },
-      )
+      ),
     ];
   }
 
@@ -92,35 +116,28 @@ class FakeWeChatState extends State<FakeWeChat> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '微信仿真',
-      theme: ThemeData(
-        primaryColor: Colors.blue,
-      ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            _appBarTitles[_currentItemIndex]
-          ),
-          actions: _actions
+    return Scaffold( // 就像是一个页面模板，里面包含了App标题栏、App内容、App底部栏等内容，我们可以随意组装
+        appBar: AppBar( //App的标题栏
+            title: Text( //标题
+                _appBarTitles[_currentItemIndex]
+            ),
+            actions: _actions //
         ),
-        body: IndexedStack(
-          index: _currentItemIndex,
-          children: _bodyPages
+        body: IndexedStack( //App的内容
+            index: _currentItemIndex,
+            children: _bodyPages
         ),
-        bottomNavigationBar: BottomNavigationBar(
-            currentIndex: _currentItemIndex,
-            type: BottomNavigationBarType.fixed,
-            fixedColor: Colors.blue,
-            items: _bottomNavigationBarItems,
-            onTap: (index) {
-              setState(() {
-                _currentItemIndex = index;
-              });
-            },
+        bottomNavigationBar: BottomNavigationBar( //App的底部栏
+          currentIndex: _currentItemIndex,
+          type: BottomNavigationBarType.fixed,
+          fixedColor: Colors.blue,
+          items: _bottomNavigationBarItems,
+          onTap: (index) {
+            setState(() {
+              _currentItemIndex = index;
+            });
+          },
         )
-      ),
     );
   }
-
 }

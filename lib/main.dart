@@ -4,6 +4,7 @@ import 'package:data_plugin/bmob/bmob.dart';
 
 void main() => runApp(MyApp());
 
+/// MyApp是一个Widget，返回FakeWeChat，FakeWeChat也是一个Widget
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
